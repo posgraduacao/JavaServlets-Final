@@ -12,17 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.com.jservlets.dao.UsuarioDAO;
+import br.com.jservlets.model.Usuario;
+
 /**
  * Servlet implementation class Login
  */
 @WebServlet("/Login")
-public class Login extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Login() {
+	public LoginServlet() {
 		super();
 	}
 
@@ -54,15 +57,19 @@ public class Login extends HttpServlet {
 			String password = request.getParameter("password");
 			boolean login = false;
 			
-					
+			Usuario usuario = new Usuario();
+			UsuarioDAO dao = new UsuarioDAO();		
+			
 			if (userid != null && password !=null)
 			{
+				dao.beginTransaction();
+				usuario = dao.findByUsuario(userid);
+				dao.commitAndCloseTransaction();
 				
+				if(usuario != null) {
+					login = true;
+				}
 				
-//				Statement stmt = dbConnection.createStatement();
-//				ResultSet rs =	stmt.executeQuery("SELECT * FROM LOGIN WHERE ID='"+userid+"' AND PWD='"+password+"'");
-//				if (rs.next())
-//					login = true;
 			}
 			
 			if (login)
@@ -73,20 +80,14 @@ public class Login extends HttpServlet {
 				
 				session.setAttribute("userid", userid);	
 				
-							
-				RequestDispatcher rd = request.getRequestDispatcher("Contato.html");
-				
+				RequestDispatcher rd = request.getRequestDispatcher("/ListarProdutos");
 				rd.forward(request, response);
-				
 				return;
-				
 			}
 			else
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("Login.html");
-				
 				rd.forward(request, response);
-				
 				return;
 			}
 		}

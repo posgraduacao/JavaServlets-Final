@@ -13,7 +13,7 @@ public class ProdutoDAO extends GenericDAO<Integer, Produto>{
 	}
 
 	public List<Produto> lista() {
-		String sql = "select p from Produto";
+		String sql = "select p from Produto p";
 		Query query = super.getEntityManager().createQuery(sql);
 		
 		@SuppressWarnings("unchecked")
