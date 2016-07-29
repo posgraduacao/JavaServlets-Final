@@ -18,7 +18,7 @@ import br.com.jservlets.model.Usuario;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -80,13 +80,13 @@ public class LoginServlet extends HttpServlet {
 				
 				session.setAttribute("userid", userid);	
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/ListarProdutos");
+				RequestDispatcher rd = request.getRequestDispatcher("./ListarServlet");
 				rd.forward(request, response);
 				return;
 			}
 			else
 			{
-				RequestDispatcher rd = request.getRequestDispatcher("Login.html");
+				RequestDispatcher rd = request.getRequestDispatcher("login.html");
 				rd.forward(request, response);
 				return;
 			}

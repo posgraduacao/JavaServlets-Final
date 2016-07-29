@@ -14,26 +14,24 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.jservlets.dao.ProdutoDAO;
 import br.com.jservlets.model.Produto;
 
-@WebServlet("/ListarServlet")
-public class ListarServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@WebServlet("/PesquisarServlet")
+public class PesquisarServlet extends HttpServlet{
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		List<Produto> lista = new ArrayList<>();
 		ProdutoDAO dao = new ProdutoDAO();
+		String nome = req.getParameter("nome");
+		
 		dao.beginTransaction();
-		lista = dao.lista();
+		lista = dao.findByProduto(nome);
 		dao.commitAndCloseTransaction();
-		request.setAttribute("lista", lista);
+		req.setAttribute("lista", lista);
 
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/listarprodutos.jsp");
-		rd.forward(request, response);
-
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/pesquisarProdutos.jsp");
+		rd.forward(req, res);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		 doGet(request, response);
-	}
 }

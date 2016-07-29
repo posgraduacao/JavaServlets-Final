@@ -2,6 +2,7 @@ package br.com.jservlets.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.jservlets.model.Produto;
@@ -19,6 +20,19 @@ public class ProdutoDAO extends GenericDAO<Integer, Produto>{
 		@SuppressWarnings("unchecked")
 		List<Produto> retorno = query.getResultList();
 		return retorno;
+	}
+	
+	public List<Produto> findByProduto(String produto){
+		Query query = super.getEntityManager().
+				createNamedQuery("Produto.findByProduto");
+		query.setParameter("produto", "%" + produto + "%");
+		try{
+			@SuppressWarnings("unchecked")
+			List<Produto> retorno = query.getResultList();
+			return retorno;
+		}catch(NoResultException nr){
+			return null;
+		}
 	}
 	
 }

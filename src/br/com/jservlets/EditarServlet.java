@@ -12,36 +12,30 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.jservlets.dao.ProdutoDAO;
 import br.com.jservlets.model.Produto;
 
-@WebServlet("/ProdutoServlet")
-public class ProdutoServlet extends HttpServlet {
+@WebServlet("/EditarServlet")
+public class EditarServlet extends HttpServlet{
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		Produto p = new Produto();
 		ProdutoDAO dao = new ProdutoDAO();
-
-		String nome = req.getParameter("nome");
-		String descricao = req.getParameter("descricao");
-		String preco = req.getParameter("preco");
-		String estoque = req.getParameter("estoque");
-
-		p.setNome(nome);
-		p.setDescricao(descricao);
-		p.setPreco(Double.parseDouble(preco));
-		p.setEstoque(Integer.parseInt(estoque));
-
+		String action = req.getParameter("id");
+		
 		try {
 			dao.beginTransaction();
-			dao.save(p);
+			p = dao.find(Integer.parseInt(action));
 			dao.commitAndCloseTransaction();
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/ListarServlet");
+			
+			req.setAttribute("p", p);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("editarProduto.jsp");
 			rd.forward(req, res);
 		} catch (Exception e) {
 			dao.rollbackAndCloseTransaction();
 			e.printStackTrace();
 		}
-
+		
 	}
-
 }

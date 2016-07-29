@@ -18,28 +18,15 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Tela Principal</h4>
+					<form action="ListarServlet" method="get">
+						<button type="submit" class="close" data-dismiss="modal"
+							aria-label="Close"> <span
+							aria-hidden="true">&times;</span>
+						</button>
+					</form>
+					<h4 class="modal-title" id="myModalLabel">Pesquisar Produto</h4>
 				</div>
 				<div class="modal-body">
-					<div class="row">
-						<div class="col-md-2">
-							<a href="../JavaServlets-Final/produto.jsp"
-								class="btn btn-success">Adicionar</a>
-						</div>
-						<div class="col-md-6">
-							<form action="PesquisarServlet" method="post" class="form-inline">
-								<div class="form-group">
-									<input type="text" name="nome" class="form-control"
-										placeholder="Pesquisar" />
-									<button type="submit" name="action" value="Pesquisar"
-										class="btn btn-default">
-										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-									</button>
-								</div>
-							</form>
-						</div>
-					</div>
-					<br/>
 					<div>
 						<table class="table table-hover">
 							<tbody>

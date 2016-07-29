@@ -2,13 +2,31 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Sistema de Produtos</title>
+<link href="resources/css/bootstrap.css" rel="stylesheet">
+<link href="resources/css/signin.css" rel="stylesheet">
 </head>
 <body>
-	<form action="Login" method="post">
-		Usuário: <input type="text" name="userid" /><br /> Password: <input
-			type="password" name="password" /><br /> <input type="submit"
-			value="Login" />
-	</form>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
+	<div class="container">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Entrar</h4>
+				</div>
+				<form action="LoginServlet" method="post" class="form-signin">
+					<div class="modal-body">
+						<input type="text" name="userid" class="form-control"
+							placeholder="Usuário" /> <input type="password" name="password"
+							class="form-control" placeholder="Senha" /> <input type="submit"
+							value="Login" class="btn btn-lg btn-primary btn-block" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
