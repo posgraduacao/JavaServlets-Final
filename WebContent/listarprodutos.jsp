@@ -59,8 +59,8 @@
 										<td><c:out value="${p.descricao}"></c:out></td>
 										<td><c:out value="${p.preco}"></c:out></td>
 										<td><c:out value="${p.estoque}"></c:out></td>
-										<td><a href="EditarServlet?id=${p.id}">Editar</a></td>
-										<td><a href="ExcluirServlet?id=${p.id}">Excluir</a></td>
+										<td><a href="EditarServlet?id=${p.id}" class="text-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+										<td><a href="ExcluirServlet?id=${p.id}" class="text-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
